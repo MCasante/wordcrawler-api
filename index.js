@@ -1,8 +1,9 @@
+require('dotenv').config()
+
 const express = require('express')
 const cors = require('cors')
 
 const app = express()
-const PORT = 3000
 
 
 const WordCrawler = require('./src/wordCrawler')
@@ -25,6 +26,6 @@ app.post('/navigate', async (req, res) => {
 
 
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('listening...')
 })
