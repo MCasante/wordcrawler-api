@@ -10,25 +10,29 @@ class WordCrawler {
     }
 
     async populateContent() {
-        const browser = await puppeteer.launch()
-        const page = await browser.newPage()
-        await page.goto(this.url)
+        try {
+            const browser = await puppeteer.launch()
+            const page = await browser.newPage()
+            await page.goto(this.url)
 
-        const keys = await page.$eval('body', (elem, ignore) => (
-            [].concat.apply([], elem.innerText.split('\n')
-                .map(text => text.trim())
-                .map(text => text.toLowerCase().split(' '))
-            ).map(key => key.replace(/\(|\)|\.|\,|\?|\:|\;|\"|\'|\!/g, ''))
-                .filter(text => !ignore.includes(text))
+            const keys = await page.$eval('body', (elem, ignore) => (
+                [].concat.apply([], elem.innerText.split('\n')
+                    .map(text => text.trim())
+                    .map(text => text.toLowerCase().split(' '))
+                ).map(key => key.replace(/\(|\)|\.|\,|\?|\:|\;|\"|\'|\!/g, ''))
+                    .filter(text => !ignore.includes(text))
 
-        ), this.ignore)
+            ), this.ignore)
 
-        const content = keys.join(' ')
+            const content = keys.join(' ')
 
-        this.keys = keys
-        this.content = content
+            this.keys = keys
+            this.content = content
 
-        await browser.close()
+            await browser.close()
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     async setOccurrences() {
