@@ -1,7 +1,10 @@
 {
-  "name": "wordCrawler",
+  "name": "word-crawler",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "10.x"
+  },
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
