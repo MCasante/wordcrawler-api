@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
     res.send('WordCrawler Api')
 })
 
-app.post('/navigate', async (req, res) => {
+app.post('/get-occurrences', async (req, res) => {
     const { url } = req.body
     const crawler = new WordCrawler(url)
 
@@ -22,6 +22,21 @@ app.post('/navigate', async (req, res) => {
     res.json(occ)
 })
 
+app.post('/get-keys', async (req, res) => {
+    const { url } = req.body
+    const crawler = new WordCrawler(url)
+
+    const keys = await crawler.getKeys()
+    res.json(keys)
+})
+
+app.post('/get-content', async (req, res) => {
+    const { url } = req.body
+    const crawler = new WordCrawler(url)
+
+    const content = await crawler.getContent()
+    res.json(content)
+})
 
 
 app.listen(process.env.PORT || 5000)

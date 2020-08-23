@@ -53,17 +53,17 @@ class WordCrawler {
 
 
     async getContent() {
-        if (!this.content) await this.populateContent()
+        await this.populateContent()
         return this.content
     }
 
     async getOccurrences() {
-        if (this.occurrences.length < 1) await this.setOccurrences()
+        await this.setOccurrences()
         return this.occurrences
     }
 
     async getKeys() {
-        if (this.keys.length < 1) await this.populateContent()
+        await this.populateContent()
         return this.keys
     }
 
