@@ -10,11 +10,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.get('/', (req, res) => {
-    res.send('WordCrawler Api')
-})
-
-app.get('/get-occurrences', async (req, res) => {
+app.post('/get-occurrences', async (req, res) => {
     const { url } = req.body
     const crawler = new WordCrawler(url)
 
@@ -22,7 +18,7 @@ app.get('/get-occurrences', async (req, res) => {
     res.json(occ)
 })
 
-app.get('/get-keys', async (req, res) => {
+app.post('/get-keys', async (req, res) => {
     const { url } = req.body
     const crawler = new WordCrawler(url)
 
@@ -30,7 +26,7 @@ app.get('/get-keys', async (req, res) => {
     res.json(keys)
 })
 
-app.get('/get-content', async (req, res) => {
+app.post('/get-content', async (req, res) => {
     const { url } = req.body
 
     const crawler = new WordCrawler(url)
