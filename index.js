@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
     res.send('WordCrawler Api')
 })
 
-app.post('/get-occurrences', async (req, res) => {
+app.get('/get-occurrences', async (req, res) => {
     const { url } = req.body
     const crawler = new WordCrawler(url)
 
@@ -22,7 +22,7 @@ app.post('/get-occurrences', async (req, res) => {
     res.json(occ)
 })
 
-app.post('/get-keys', async (req, res) => {
+app.get('/get-keys', async (req, res) => {
     const { url } = req.body
     const crawler = new WordCrawler(url)
 
@@ -30,10 +30,10 @@ app.post('/get-keys', async (req, res) => {
     res.json(keys)
 })
 
-app.post('/get-content', async (req, res) => {
+app.get('/get-content', async (req, res) => {
     const { url } = req.body
-    const crawler = new WordCrawler(url)
 
+    const crawler = new WordCrawler(url)
     const content = await crawler.getContent()
     res.json(content)
 })

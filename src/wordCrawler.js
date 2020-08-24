@@ -54,12 +54,16 @@ class WordCrawler {
 
         const incidencesArray = []
         this.keys.forEach(key => {
-            const regex = new RegExp(key, "g");
-            if (!incidencesArray.some(item => item.name === key))
-                incidencesArray.push({
-                    name: key,
-                    incidences: (this.content.match(regex) || []).length
-                })
+            try {
+                const regex = new RegExp(key, "g");
+                if (!incidencesArray.some(item => item.name === key))
+                    incidencesArray.push({
+                        name: key,
+                        incidences: (this.content.match(regex) || []).length
+                    })
+            } catch (err) {
+                console.log(err)
+            }
         })
 
         this.occurrences = incidencesArray.sort((a, b) => a.incidences > b.incidences ? -1 : 1)
